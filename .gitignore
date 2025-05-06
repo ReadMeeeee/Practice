@@ -1,0 +1,8 @@
+.env
+
+.venv/
+.idea/
+.ipynb_checkpoints/
+
+to_process/
+input_data/
