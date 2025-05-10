@@ -8,6 +8,8 @@ from config import (
     path_to_input_data
 )
 from processing import chat_process, process_all_docs
+from file_io import upload_data
+from models import ProblemWithSolution
 
 
 def main():
@@ -15,13 +17,14 @@ def main():
 
     company_chats = process_all_docs(path_to_input_data, output_dir=path_to_process)
 
+    if not company_chats:
+        print("Нет данных для обработки.")
+        return
+
+    list_of_sol: list[ProblemWithSolution] = []
     for company in company_chats:
         task_filename = f"{company.company}.txt"
         path_to_task_txt = path.join(path_to_process, task_filename)
-
-        if not path.exists(path_to_task_txt):
-            print(f"Файл не найден: {path_to_task_txt}")
-            continue
 
         try:
             sol = chat_process(
@@ -30,7 +33,9 @@ def main():
                 path_to_task_txt=path_to_task_txt,
                 multi_thread=True
             )
+            list_of_sol.append(sol)
 
+            '''
             separator = "-" * 50
             print(
                 f"\nРезультат для компании: {company.company}\n"
@@ -39,9 +44,17 @@ def main():
                 f"{' '.join(sol.keywords)}\n{separator}\n"
                 f"{sol.solution}"
             )
+            '''
 
+        except FileNotFoundError:
+            print(f"Файл не найден: {path_to_task_txt}")
         except Exception as e:
             print(f"Ошибка при обработке {company.company}: {e}")
+
+    if list_of_sol:
+        upload_data(json_path="solutions.json", list_of_sol=list_of_sol)
+    else:
+        print("Нет решений для записи.")
 
 
 if __name__ == "__main__":

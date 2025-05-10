@@ -1,4 +1,4 @@
-from os import makedirs
+from os import makedirs, path
 from models import CompanyChat
 
 
@@ -10,6 +10,11 @@ def write_text_to_file(
     data: CompanyChat,
     folder_path: str = "to_process"
 ) -> None:
-    file_path = folder_path + '/' + data.company + ".txt"
+    ensure_folder_exists(folder_path)
+
+    if not data.company or not data.whole_chat:
+        raise ValueError("Пустые имя компании или текст")
+
+    file_path = path.join(folder_path, data.company + ".txt")
     with open(file_path, "w", encoding="utf-8") as f:
         f.write(data.whole_chat)
