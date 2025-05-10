@@ -34,12 +34,13 @@ class LLMRequest:
     instruction_block: InstructionBlock
     task: str
 
+
     def to_prompt(self) -> list[dict[str, str]]:
         prompt = (
             f"{self.instruction_block.instruction}\n\n"
             f"Контекст:\n{self.instruction_block.context}\n\n"
             f"Формат вывода:\n{self.instruction_block.format}\n\n"
-            f"Ограничение по токенам:\n{self.instruction_block.max_tokens}\n\n"
+            f"Ограничение по токенам:\n{self.max_tokens}\n\n"
             f"Входные данные:\n{self.task}"
         )
         return [
@@ -47,9 +48,11 @@ class LLMRequest:
             {"role": "user", "content": prompt}
         ]
 
+
     @property
     def max_tokens(self) -> int:
         return self.instruction_block.max_tokens
+
 
 
 @dataclass

@@ -93,6 +93,6 @@ def chat_process(
     return ProblemWithSolution(
         name=name,
         description=results["description"],
-        keywords=results["keywords"].split(),
+        keywords=results["keywords"].split(','),
         solution=results["solution"]
     )
