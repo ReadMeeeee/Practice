@@ -1,6 +1,6 @@
 from json import load, dump
 from os import path
-from models import InstructionBlock, ProblemWithSolution
+from solution.models import InstructionBlock, ProblemWithSolution
 
 
 def load_data(instruction_path: str) -> str:

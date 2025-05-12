@@ -1,3 +1,4 @@
+# from tiktoken import get_encoding # Для адаптивного подсчета токенов
 from dataclasses import dataclass
 
 

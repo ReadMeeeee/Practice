@@ -1,6 +1,6 @@
-from file_io import load_docx_from_project, ensure_folder_exists, write_text_to_file
-from processing import convert_from_docx, format_chat
-from models import Chat, CompanyChat
+from solution.file_io import load_docx_from_project, ensure_folder_exists, write_text_to_file
+from solution.processing import convert_from_docx, format_chat
+from solution.models import Chat, CompanyChat
 
 
 def process_all_docs(path_to_input_data: str, output_dir: str = None) -> list[CompanyChat]:

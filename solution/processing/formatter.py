@@ -1,6 +1,6 @@
 from docx import Document
-from models import Message, Chat, CompanyChat
-from processing import REMOVE_CHARS, clear_text
+from solution.models import Message, Chat, CompanyChat
+from solution.processing import REMOVE_CHARS, clear_text
 
 
 def convert_from_docx(document: tuple[str, Document]):

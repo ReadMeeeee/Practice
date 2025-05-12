@@ -2,8 +2,8 @@ from os import path
 from openai import OpenAI
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-from models import LLMRequest, ProblemWithSolution
-from file_io import load_data, load_instruction_file
+from solution.models import LLMRequest, ProblemWithSolution
+from solution.file_io import load_data, load_instruction_file
 
 class AIModelAPI:
     def __init__(self, api: str, url: str, model_name: str):
@@ -88,7 +88,8 @@ def chat_process(
             except Exception as e:
                 results[label] = f"Ошибка: {e}"
 
-    for key in tasks: results.setdefault(key, "")
+    for key in tasks:
+        results.setdefault(key, "")
 
     return ProblemWithSolution(
         name=name,

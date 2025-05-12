@@ -1,5 +1,5 @@
 from os import makedirs, path
-from models import CompanyChat
+from solution.models import CompanyChat
 
 
 def ensure_folder_exists(folder_path: str = "to_process") -> None:
